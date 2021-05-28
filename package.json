@@ -1,6 +1,6 @@
 {
   "name": "gulp-sftp-socksv5",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Upload files via SSH and working with gulp with socks5 proxy version. Fork of original gulp-sftp-up4",
   "license": "MIT",
   "repository": "Nicolana/gulp-sftp-socks",
