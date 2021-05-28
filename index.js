@@ -310,17 +310,19 @@ module.exports = function (options) {
 
                         fileCount++;
                     }
-                    connectionCache.exec(options.customCommand, (err, stream) => {
-                        if (err) throw err;
-                        stream.on('data', (data) => {
-                            gutil.log('STDOUT: ' + data);
-                        }).stderr.on('data', (data) => {
-                            this.emit('error', new gutil.PluginError('gulp-sftp', data));
-                        }).on('close', () => {
-                            gutil.log('gulp-sftp:', gutil.colors.green('Shell command execured'));
-                            return cb(err);
+                    if (options.customCommand) {
+                        connectionCache.exec(options.customCommand, (err, stream) => {
+                            if (err) throw err;
+                            stream.on('data', (data) => {
+                                gutil.log('STDOUT: ' + data);
+                            }).stderr.on('data', (data) => {
+                                this.emit('error', new gutil.PluginError('gulp-sftp', data));
+                            }).on('close', () => {
+                                gutil.log('gulp-sftp:', gutil.colors.green('Shell command execured'));
+                                return cb(err);
+                            });
                         });
-                    });
+                    }
                     return cb(err);
                 });
 

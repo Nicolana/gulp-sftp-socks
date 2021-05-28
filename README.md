@@ -6,10 +6,11 @@ This solution is by Dan503 https://github.com/gtg092x/gulp-sftp/issues/78#issuec
 And what I did - is just public it in npm with name "gulp-sftp-up4"
 
 Original README text below:
-(Just use new name gulp-sftp-up4)
+(Just use new name `gulp-sftp-socksv5`)
 
-
-> Upload files via SSH
+```
+Upload files via SSH
+```
 
 Useful for uploading and deploying things via sftp. Right now this plugin just uploads everything. Caching and hash comparison are two TODO items.  
 
@@ -130,6 +131,12 @@ type `ReadableStream `
 default: `null`
 
 A ReadableStream to use for communicating with the server instead of creating and using a new TCP connection (useful for connection hopping).
+
+#### options.customCommand
+type `String`
+default: `null`
+
+Execute shell command after file uploaded.
 
 #### options.agent
 type `String`
