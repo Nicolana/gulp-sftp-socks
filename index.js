@@ -311,17 +311,17 @@ module.exports = function (options) {
                         fileCount++;
                     }
                     if (options.customCommand) {
-                        connectionCache.exec(options.customCommand, (err, stream) => {
+                        connectionCache.exec(options.customCommand, (err2, stream) => {
                             if (err) throw err;
                             stream.on('data', (data) => {
                                 gutil.log('STDOUT: ' + data);
-                            }).stderr.on('data', (data) => {
-                                this.emit('error', new gutil.PluginError('gulp-sftp', data));
                             }).on('close', () => {
-                                gutil.log('gulp-sftp:', gutil.colors.green('Shell command execured'));
+                                gutil.log('gulp-sftp:', gutil.colors.green('Shell command executed!'));
                                 return cb(err);
                             });
                         });
+                    } else {
+                        return cb(err);
                     }
                 });
 
