@@ -18,7 +18,7 @@ Useful for uploading and deploying things via sftp. Right now this plugin just u
 ## Install
 
 ```bash
-$ npm install --save-dev gulp-sftp-up4
+$ npm install --save-dev gulp-sftp-socksv5
 ```
 
 
@@ -26,7 +26,7 @@ $ npm install --save-dev gulp-sftp-up4
 
 ```js
 var gulp = require('gulp');
-var sftp = require('gulp-sftp-up4');
+var sftp = require('gulp-sftp-socksv5');
 
 gulp.task('default', function () {
 	return gulp.src('src/*')
