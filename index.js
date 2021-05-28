@@ -7,7 +7,6 @@ var through = require('through2');
 var Connection = require('ssh2');
 var async = require('async');
 var parents = require('parents');
-var Stream = require('stream');
 var assign = require('object-assign');
 
 var normalizePath = function(path){
