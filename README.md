@@ -125,6 +125,12 @@ Default: Currently set by ssh2 as `10000` milliseconds.
 
 An integer in milliseconds specifying how long to wait for a server response.
 
+#### options.sock
+type `ReadableStream `
+default: `null`
+
+A ReadableStream to use for communicating with the server instead of creating and using a new TCP connection (useful for connection hopping).
+
 #### options.agent
 type `String`
 Default: `null`

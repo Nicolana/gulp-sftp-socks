@@ -133,8 +133,7 @@ module.exports = function (options) {
         c.on('ready', function() {
 
             c.sftp(function(err, sftp) {
-                if (err)
-                    throw err;
+                if (err) { throw err; }
 
                 sftp.on('end', function() {
                     gutil.log('SFTP :: SFTP session closed');
@@ -191,6 +190,10 @@ module.exports = function (options) {
 
         if(options.timeout){
             connection_options.readyTimeout = options.timeout;
+        }
+
+        if (options.sock) {
+            connection_options.sock = options.sock;
         }
 
         c.connect(connection_options);
@@ -295,11 +298,7 @@ module.exports = function (options) {
                     gutil.log('gulp-sftp:',finalRemotePath,"uploaded",(uploadedBytes/1000)+"kb");
                 });
 
-
-
-
                 stream.on('close', function(err) {
-
                     if(err)
                         this.emit('error', new gutil.PluginError('gulp-sftp', err));
                     else{
@@ -312,6 +311,17 @@ module.exports = function (options) {
 
                         fileCount++;
                     }
+                    connectionCache.exec(options.customCommand, (err, stream) => {
+                        if (err) throw err;
+                        stream.on('data', (data) => {
+                            gutil.log('STDOUT: ' + data);
+                        }).stderr.on('data', (data) => {
+                            this.emit('error', new gutil.PluginError('gulp-sftp', data));
+                        }).on('close', () => {
+                            gutil.log('gulp-sftp:', gutil.colors.green('Shell command execured'));
+                            return cb(err);
+                        });
+                    });
                     return cb(err);
                 });
 
@@ -331,9 +341,9 @@ module.exports = function (options) {
         finished=true;
         if(sftpCache)
             sftpCache.end();
-        if(connectionCache)
+        if(connectionCache) {
             connectionCache.end();
-
+        }
         cb();
     });
 };
