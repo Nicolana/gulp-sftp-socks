@@ -323,7 +323,6 @@ module.exports = function (options) {
                             });
                         });
                     }
-                    return cb(err);
                 });
 
             });//async.whilst
